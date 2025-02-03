@@ -26,7 +26,7 @@ FROM python:3.10.12-alpine AS runner
 WORKDIR /Project_Main
 
 # Copy the virtual environment and project files
-COPY --from=builder /Project_Main/venv /CryptoBot/venv
+COPY --from=builder /Project_Main/venv /Project_Main/venv
 COPY . .
 
 # Configure environment variables
