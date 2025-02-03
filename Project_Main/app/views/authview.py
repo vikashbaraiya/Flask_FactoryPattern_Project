@@ -13,7 +13,6 @@ from app.services.baseservice import BaseService
 from app.utils.base_logger import BaseLogger
 from app import create_app
 from app.utils.config_loader import conf_bot_url, auth_user_type
-from app.services.external_api_service import ExternalApiService
 from flask import g
 from flask_jwt_extended import JWTManager, create_access_token, jwt_required, get_jwt_identity, get_jwt, unset_jwt_cookies
 from flask_wtf.csrf import CSRFProtect, generate_csrf
@@ -67,11 +66,6 @@ def signup(data):
 
     # Commit the user and account to the database
     
-    # Call external API to add the account
-    status, message = ExternalApiService.add_account_to_external_api(default_account_name)
-    if status != 201:
-        app_logger.info(f"External API call failed: {message}")
-        return jsonify({'message': f"Account creation failed in external API: {message}"}), 500
 
     # Send OTP email
     try:
